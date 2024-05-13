@@ -1,5 +1,9 @@
 const CallbackPage = () => {
-	return <></>;
+	return (
+		<>
+			<p>callback</p>
+		</>
+	);
 };
 
 export default CallbackPage;
