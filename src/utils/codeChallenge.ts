@@ -14,10 +14,10 @@ const sha256 = async (plain: string) => {
 };
 
 const base64encode = (input: ArrayBuffer) => {
-	const textDecoder = new TextDecoder();
-	const decodedInput = textDecoder.decode(input);
+	const inputCharArray = new Uint8Array(input);
+	const inputString = String.fromCharCode(...inputCharArray);
 
-	return btoa(decodedInput)
+	return btoa(inputString)
 		.replace(/=/g, "")
 		.replace(/\+/g, "-")
 		.replace(/\//g, "_");
