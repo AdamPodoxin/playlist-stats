@@ -1,8 +1,9 @@
 "use client";
 
-import { spotify } from "@/constants";
-import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 import { useCallback, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { spotify } from "@/constants";
 
 const CallbackPage = () => {
 	const router = useRouter();
@@ -20,7 +21,7 @@ const CallbackPage = () => {
 			return;
 		}
 
-		const codeVerifier = localStorage.getItem("code_verifier");
+		const codeVerifier = Cookies.get("code_verifier");
 		if (!codeVerifier) {
 			return;
 		}
@@ -52,7 +53,7 @@ const CallbackPage = () => {
 			return;
 		}
 
-		localStorage.setItem("access_token", response.access_token);
+		Cookies.set("access_token", response.access_token);
 
 		router.push("/");
 	}, [router]);

@@ -1,12 +1,13 @@
 "use client";
 
-import { spotify } from "@/constants";
+import Cookies from "js-cookie";
+import { useCallback, useEffect } from "react";
 import {
 	generateCodeChallenge,
 	generateCodeVerifier,
 } from "@/utils/codeChallenge";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { spotify } from "@/constants";
 
 const LoginPage = () => {
 	const router = useRouter();
@@ -15,7 +16,7 @@ const LoginPage = () => {
 		const codeVerifier = generateCodeVerifier();
 		const codeChallenge = await generateCodeChallenge(codeVerifier);
 
-		window.localStorage.setItem("code_verifier", codeVerifier);
+		Cookies.set("code_verifier", codeVerifier);
 
 		const params = {
 			response_type: "code",
